@@ -104,7 +104,7 @@ body {
   display: grid;
   width: 96%;
   margin: 0 auto;
-  grid-template-columns: 14rem auto;
+  grid-template-columns: 16rem auto;
   gap: 1.8rem;
 }
 
@@ -238,4 +238,132 @@ aside .sidebar a:last-child {
   position: absolute;
   bottom: 2rem;
   width: 100%;
+}
+
+aside .sidebar a.active {
+  background: var(--color-light);
+  color: var(--color-primary);
+  margin-left: 0;
+}
+
+aside .sidebar a.active:before {
+  content: "";
+  width: 6px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+aside .sidebar a.active span {
+  margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover {
+  color: var(--color-primary);
+}
+
+aside .sidebar a:hover span {
+  margin-left: 1.4rem;
+}
+
+/* POMODORO */
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.pomodoro-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.panel {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 20rem;
+  margin: 5rem;
+  padding: 1rem;
+  border-radius: 10rem;
+  -webkit-box-shadow: 0px 0px 15px 10px var(--color-shadow);
+  box-shadow: 0px 0px 15px 10px var(--color-shadow);
+}
+
+.panel p {
+  opacity: 0.8;
+  transition: 1s ease-in;
+}
+
+.panel p.active {
+  opacity: 1;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 15px 10px var(--color-shadow);
+  box-shadow: 0px 0px 15px 10px var(--color-shadow);
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  position: relative;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  background-color: var(--color-white);
+}
+
+.time {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.time p {
+  font-size: 4rem;
+}
+
+.time p:nth-of-type(2) {
+  position: relative;
+  top: -0.5rem;
+  margin-inline: 1rem;
+}
+
+.controls {
+  margin-top: 3rem;
+}
+
+.controls button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.controls #reset {
+  display: none;
 }

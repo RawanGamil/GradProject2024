@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Pomodoro</title>
+    <title>Simple View Pomodoro</title>
     <link rel="stylesheet" href="simple-view.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet"
@@ -12,84 +12,91 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/6f3103b13c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <div class="container">
         <aside>
+
             <div class="top">
                 <div class="logo">
                     <img src="/combo/images/grad logo.png" alt="">
-                    <h2>Check-It-<span class="danger">OFF</span></h2>
+                    <h2>Check-It-<span class="">OFF</span></h2>
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-symbols-sharp">
                         close
                     </span>
                 </div>
+            </div>
 
-                <div class="sidebar">
-                    <a href="#" class="">
-                        <span class="material-icons-sharp">
-                            task_alt
-                        </span>
-                        <h3>Tasks</h3>
-                    </a>
-                    <a href="#" class="active">
-                        <span class="material-icons-sharp">
-                            timer
-                        </span>
-                        <h3>Pomodoro Timer</h3>
-                    </a>
-                    <a href="#" class="">
-                        <span class="material-icons-sharp">
-                            extension
-                        </span>
-                        <h3>Brain Games</h3>
-                    </a>
+            <div class="sidebar">
+                <a href="#" class="">
+                    <span class="material-icons-sharp">
+                        task_alt
+                    </span>
+                    <h3>Tasks</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">
+                        timer
+                    </span>
+                    <h3>Pomodoro Timer</h3>
+                </a>
+                <a href="#" class="">
+                    <span class="material-icons-sharp">
+                        extension
+                    </span>
+                    <h3>Brain Games</h3>
+                </a>
 
-                    <a href="#">
-                        <span class="material-symbols-sharp">
-                            logout
-                        </span>
-                        <h3>Log Out</h3>
-                    </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        logout
+                    </span>
+                    <h3>Log Out</h3>
+                </a>
 
-                </div>
             </div>
         </aside>
-    </div>
 
 
+        <section>
+            <div class="pomodoro-container">
+                <h1>Pomodoro</h1>
 
-    <section>
-        <div class="pomodoro-container">
-            <h1>Pomodoro</h1>
+                <div class="panel">
+                    <p id="work">work</p>
+                    <p id="break">break</p>
+                </div>
 
-            <div class="panel">
-                <p id="work">work</p>
-                <p id="break">break</p>
-            </div>
-
-            <div class="timer">
-                <div class="circle">
-                    <div class="time">
-                        <p id="minutes"></p>
-                        <p>:</p>
-                        <p id="seconds"></p>
+                <div class="timer">
+                    <div class="circle">
+                        <div class="time">
+                            <p id="minutes"></p>
+                            <p>:</p>
+                            <p id="seconds"></p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="controls">
+                    <button id="start" onclick="start()"><i class="fa-solid fa-play"></i></button>
+
+                    <a id="reset" href="pomodoro.html"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+                </div>
             </div>
+        </section>
 
-            <div class="controls">
-                <button id="start" onclick="start()"><i class="fa-solid fa-play"></i></button>
 
-                <a id="reset" href="pomodoro.html"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-            </div>
-        </div>
-    </section>
-
+    </div>
 
     <script src="pomodoro.js"></script>
 </body>
