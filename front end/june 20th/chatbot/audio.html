@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record, Save, and Playback Audio</title>
+</head>
+
+<body>
+    <button id="startRecord">Start Recording</button>
+    <button id="stopRecord" disabled>Stop Recording</button>
+    <button id="playback" disabled>Playback Recording</button>
+    <div id="audioPlayer"></div>
+    <script>
+        let mediaRecorder;
+        let chunks = [];
+        let recordedAudioUrl;
+
+        const startRecording = () => {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+
+                    mediaRecorder.ondataavailable = (e) => {
+                        chunks.push(e.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(chunks);
+
+                        // Create object URL for playback
+                        recordedAudioUrl = URL.createObjectURL(audioBlob);
+
+                        // Enable playback button
+                        document.getElementById('playback').disabled = false;
+
+                        // Send audioBlob to backend
+                        const formData = new FormData();
+                        formData.append('audio', audioBlob, 'recorded_audio.wav');
+
+                        fetch('/upload-audio', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log('Audio uploaded successfully');
+                                } else {
+                                    console.error('Failed to upload audio');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error uploading audio:', error);
+                            });
+
+                        chunks = [];
+                    };
+                })
+                .catch(error => {
+                    console.error('Error accessing user media:', error);
+                });
+        };
+
+        const stopRecording = () => {
+            mediaRecorder.stop();
+        };
+
+        const playbackRecording = () => {
+            const audioElement = document.createElement('audio');
+            audioElement.controls = true;
+            audioElement.src = recordedAudioUrl;
+            document.getElementById('audioPlayer').appendChild(audioElement);
+        };
+
+        document.getElementById('startRecord').addEventListener('click', () => {
+            startRecording();
+            document.getElementById('startRecord').disabled = true;
+            document.getElementById('stopRecord').disabled = false;
+        });
+
+        document.getElementById('stopRecord').addEventListener('click', () => {
+            stopRecording();
+            document.getElementById('startRecord').disabled = false;
+            document.getElementById('stopRecord').disabled = true;
+            document.getElementById('playback').disabled = false; // Enable playback after recording is stopped
+        });
+
+        document.getElementById('playback').addEventListener('click', () => {
+            playbackRecording();
+        });
+    </script>
+</body>
+
+</html>
